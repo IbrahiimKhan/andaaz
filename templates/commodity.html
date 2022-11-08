@@ -23,7 +23,7 @@
             <div class="logo_div">
              
             <!-- <img class="yoga-baba" src="../static//images/yoga.png" alt=""> -->
-            <h2 class="logo">Andaaz</h2>
+            <a href="http://127.0.0.1:5000/" style="text-decoration:none"><h2 class="logo">Andaaz</h2></a>
             </div>
             <div class="menus">
               <!-- <div class="list-group">
@@ -63,7 +63,6 @@
                         </li>
                         <li class="nav-item">
                           <a href=""><img src="https://img.icons8.com/color/48/000000/male-user.png" alt=""></a>
-                    
                         </li>
                         
                       </ul>
@@ -88,129 +87,128 @@
    
     <h2 class="header">{{context.name}}</h2>
     <div class="row">
-        <div class="col s8 m7">
-      <div class="card horizontal medium">
-        <div class="card-image">
+        <div class="">
+      <div class="  d-flex align-items-center justify-content-center">
+        <div class="main_commo_img">
           <img src={{context.image_url}}>
         </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <table>
-              <tr>
-                <td>Current Price</td>
-                <td><b>₹ {{context.current_price}} / ql</b></td>
-              </tr>
-              <tr>
-                <td>Prime Location</td>
-                <td><b>{{context.prime_loc}}</b></td>
-              </tr>
-              <tr>
-                <td>Crop Type</td>
-                <td><b>{{context.type_c}}</b></td>
-              </tr>
-              <tr>
-                <td>Export</td>
-                <td><b>{{context.export}}</b></td>
-              </tr>
-            </table>
+        <div class="card-image">
+          <div class="">
+            <div class="info_box">
+              <table>
+                <tr>
+                  <td>Current Price</td>
+                  <td><b> {{context.current_price}} / ql</b></td>
+                </tr>
+                <tr>
+                  <td>Prime Location</td>
+                  <td><b>{{context.prime_loc}}</b></td>
+                </tr>
+                <tr>
+                  <td>Crop Type</td>
+                  <td><b>{{context.type_c}}</b></td>
+                </tr>
+                <tr>
+                  <td>Export</td>
+                  <td><b>{{context.export}}</b></td>
+                </tr>
+              </table>
+              <div class="card grey lighten-3">
+                <div class="card-content black-text">
+                   <span class="card-title">Brief Forecast</span>
+                  <table>
+                    <tr>
+                      <td><p>Min. crop price time</p>
+                      <td><h5>{{context.min_crop[0]}}</h5></td>
+                      <td>
+                        <h4>৳{{context.min_crop[1]}}</h4>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p>Max. crop price time</p>
+                      <td><h5>{{context.max_crop[0]}}</h5></td>
+                      <td>
+                        <h4>৳{{context.max_crop[1]}}</h4>
+                      </td>
+                    </tr>
+                  </table>
+        
+                </div>       
+              </div>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
-
-    <div class="col s4">
-      <div class="card grey lighten-3">
-        <div class="card-content black-text">
-           <span class="card-title">Brief Forecast</span>
-          <table>
-            <tr>
-              <td><p>Min. crop price time</p>
-              <td><h5>{{context.min_crop[0]}}</h5></td>
-              <td>
-                <h4>₹{{context.min_crop[1]}}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td><p>Max. crop price time</p>
-              <td><h5>{{context.max_crop[0]}}</h5></td>
-              <td>
-                <h4>₹{{context.max_crop[1]}}</h4>
-              </td>
-            </tr>
-          </table>
-
-        </div>       
-      </div>
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  
+      <div class="col-md-6">
+      <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
+    height:400px !important;">
+      </canvas>
+    <script>
+      new Chart(
+      document.getElementById("chartjs-0"),{"type":"line","data":{"labels":{{context.forecast_x|safe}},"datasets":[{"label":"Next year Price","data":{{context.forecast_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+          yAxes: [{
+              display: true,
+              ticks: {
+                  suggestedMin: 1000,
+                  stepSize : 200
+              }
+          }]
+      }}});</script>
     </div>
+    <div class="col-md-6">
+      <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
+    height:400px !important;">
+      </canvas>
+    <script>
+      new Chart(document.getElementById("chartjs-1"),{"type":"line","data":{"labels":{{context.previous_x|safe}},"datasets":[{"label":"Previous year price","data":{{context.previous_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+          yAxes: [{
+              display : true,
+              ticks: {
+                  suggestedMin : 1000,
+                  stepSize : 200
+              }
+          }]
+      }}});</script>
+    </div>
+    <div class="brief_info_up_down">
+      <div class="col s4">
+        <h5>Forecast Trends</h5>
+       <table class="striped">
+          <thead>
+            <tr>
+                <th>Month</th>
+                <th>Price (per Qtl.)</th>
+                <th>Change</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+          {% for item in context.forecast_values %}
+            <tr>
+              <td>{{item[0]}}</td>
+              <td>৳{{item[1]}}</td>
+              <td class="valign-wrapper">{{item[2]}}% {% if item[2]>=0 %}<img src= "../static/gain-icon.png" height="25" width="25">{% else %}<img src= "../static/loss-icon.png" height="25" width="25">{% endif %}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+  </div>
+    </div>
+  
+  </div>
+
   </div>
 
 </div>
-  <div class="row">    
-    <div class="col s4">
-      <h5>Forecast Trends</h5>
-     <table class="striped">
-        <thead>
-          <tr>
-              <th>Month</th>
-              <th>Price (per Qtl.)</th>
-              <th>Change</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        {% for item in context.forecast_values %}
-          <tr>
-            <td>{{item[0]}}</td>
-            <td>₹{{item[1]}}</td>
-            <td class="valign-wrapper">{{item[2]}}% {% if item[2]>=0 %}<img src= "../static/gain-icon.png" height="25" width="25">{% else %}<img src= "../static/loss-icon.png" height="25" width="25">{% endif %}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-</div>
-<div class="col s2"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-    <div class="chartjs-wrapper col s7 offset-s1">
-    <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
-  height:400px !important;">
-    </canvas>
-  <script>
-    new Chart(
-    document.getElementById("chartjs-0"),{"type":"line","data":{"labels":{{context.forecast_x|safe}},"datasets":[{"label":"Next year Price","data":{{context.forecast_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-        yAxes: [{
-            display: true,
-            ticks: {
-                suggestedMin: 1000,
-                stepSize : 200
-            }
-        }]
-    }}});</script>
-  </div>
-  <div class="chartjs-wrapper col s7 offset-s1">
-    <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
-  height:400px !important;">
-    </canvas>
-  <script>
-    new Chart(document.getElementById("chartjs-1"),{"type":"line","data":{"labels":{{context.previous_x|safe}},"datasets":[{"label":"Previous year price","data":{{context.previous_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-        yAxes: [{
-            display : true,
-            ticks: {
-                suggestedMin : 1000,
-                stepSize : 200
-            }
-        }]
-    }}});</script>
-  </div>
-  </div>
-
-
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>

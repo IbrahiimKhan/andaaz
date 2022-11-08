@@ -131,3 +131,12 @@ strong.time {
 .bg-light {
     background-color: #fff!important;
 }
+.main_commo_img img {
+    width: 500px!important;
+}
+.info_box {
+    padding: 10px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    height: 312px;
+    font-size: 20px;
+}

@@ -169,7 +169,7 @@ def ticker(item, number):
     context = str(data[n][i])
 
     if i == 2 or i == 5:
-        context = '₹' + context
+        context = '৳' + context
     elif i == 3 or i == 6:
 
         context = context + '%'
@@ -187,7 +187,6 @@ def TopFiveWinners():
     current_month_prediction = []
     prev_month_prediction = []
     change = []
-
     for i in commodity_list:
         current_predict = i.getPredictedValue([float(current_month), current_year, current_rainfall])
         current_month_prediction.append(current_predict)
