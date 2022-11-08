@@ -1,28 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Apna Anaaj</title>
+  <title>Andaaz</title>
   <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/main.css">
     <!-- Compiled and minified JavaScript -->
      <style>
         div.main {
             padding: 5px 50px 75px 50px;
         }
-    </style>
-        
+    </style>      
 </head>
 <body >
+
   <div class="main">
-    <div class="nav-wrapper">
-
-		<h3 class="card-panel #ffd54f amber lighten-2 center valign-wrapper center"><a class="brand-logo  #ffd54f-text text-lighten-4" href="#"><img alt="" src="/static/ApnaAnaajLogo.png" height="100px" width="100px" class="responsive-img" />
-          <span>APNA ANAAJ</span></a>
-          </a></h3><h3>
-
-	</div>
+    <div class="container main_wrapper">
+      <div class="row">
+        <div class="col-3 sidebar ">
+          <div class="">
+            <div class="logo_div">
+             
+            <!-- <img class="yoga-baba" src="../static//images/yoga.png" alt=""> -->
+            <h2 class="logo">Andaaz</h2>
+            </div>
+            <div class="menus">
+              <!-- <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                  Live Forecasting
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Browse Commodity</a>
+                <a href="#" class="list-group-item list-group-item-action">Paddy</a>
+                <a href="#" class="list-group-item list-group-item-action">Soya Bean</a>
+              </div> -->
+              <div class="card-content black-text">
+                <h6 class="list-group-item list-group-item-action active" >Live Prediction</h6>
+             
+              <img src="../static/images/machine.webp" class="img-fluid robot" alt="">
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="col-9">
+          <div class="main_nav">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">All Commodity</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href=""><img src="https://img.icons8.com/color/48/000000/male-user.png" alt=""></a>
+                    
+                        </li>
+                        
+                      </ul>
+                      
+                    </div>
+                  </div>
+                </nav>
+          </div>
+         <div class="container-fluid">
+          <div class="d-flex current_forecast">
+            <div>
+              <h2>Dashboard</h2>
+            <p>Home/Dashboard</p>
+            </div>
+           
+            <div class="timeDate" >
+              <strong style="margin-bottom:50px!important" class="time"></strong>
+              
+            </div>
+        </div>
+    </div>
+   
     <h2 class="header">{{context.name}}</h2>
     <div class="row">
         <div class="col s8 m7">
@@ -147,7 +210,12 @@
 
 
 </script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../static//main.js"></script>
 </body>
 </html>

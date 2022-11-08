@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Mar  2 21:46:27 2019
-
-@author: PRATYUSH, Rahul, Somya, Abhay
-"""
 
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
@@ -12,11 +6,14 @@ import pandas as pd
 from datetime import datetime
 import crops
 import random
+import pymongo as py
 
 # import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 cors = CORS(app, resources={r"/ticker": {"origins": "http://localhost:port"}})
 
@@ -45,7 +42,6 @@ commodity_dict = {
     "urad": "static/Urad.csv",
     "wheat": "static/Wheat.csv"
 }
-
 annual_rainfall = [29, 21, 37.5, 30.7, 52.6, 150, 299, 251.7, 179.2, 70.5, 39.8, 10.9]
 base = {
     "Paddy": 1245.5,
@@ -75,18 +71,17 @@ base = {
 }
 commodity_list = []
 
-
 class Commodity:
 
     def __init__(self, csv_name):
         self.name = csv_name
+        # print(csv_name)
         dataset = pd.read_csv(csv_name)
         self.X = dataset.iloc[:, :-1].values
         self.Y = dataset.iloc[:, 3].values
 
         #from sklearn.model_selection import train_test_split
         #X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1, random_state=0)
-
         # Fitting decision tree regression to dataset
         from sklearn.tree import DecisionTreeRegressor
         depth = random.randrange(7,18)
@@ -164,7 +159,7 @@ def crop_profile(name):
         "export":crop_data[3]
     }
     return render_template('commodity.html', context=context)
-
+TEMPLATES_AUTO_RELOAD = True
 @app.route('/ticker/<item>/<number>')
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def ticker(item, number):
@@ -472,8 +467,7 @@ if __name__ == "__main__":
     wheat = Commodity(commodity_dict["wheat"])
     commodity_list.append(wheat)
 
-    app.run()
-
+app.run(debug=True)
 
 
 

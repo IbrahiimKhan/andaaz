@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Apna Anaaj</title>
+  <title>Andaaj</title>
   <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/main.css">
 
     <!-- Compiled and minified JavaScript -->
-    <style>
+    <!-- <style>
         div.main {
             padding: 5px 50px 75px 50px;
         }
@@ -22,29 +23,283 @@
         }
 
 
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
+    </style> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+         -->
 </head>
 <body class="main">
+  <div class="container main_wrapper">
+    <div class="row">
+      <div class="col-3 sidebar ">
+        <div class="">
+          <div class="logo_div">
+           
+          <!-- <img class="yoga-baba" src="../static//images/yoga.png" alt=""> -->
+          <h2 class="logo">Andaaz</h2>
+          </div>
+          <div class="menus">
+            <!-- <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                Live Forecasting
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">Browse Commodity</a>
+              <a href="#" class="list-group-item list-group-item-action">Paddy</a>
+              <a href="#" class="list-group-item list-group-item-action">Soya Bean</a>
+            </div> -->
+            <div class="card-content black-text">
+              <h6 class="list-group-item list-group-item-action active" >Live Prediction</h6>
+               <span class="card-title" id="time">{{context.sixmonths[0][0]}}</span>
+              <table class="valign-wrapper ">
+                <tr>
+                  <td><h5 id="crop1">{{context.sixmonths[0][1]}}</h5></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td class="right">
+                      <h4 id="price1">৳{{context.sixmonths[0][2]}}</h4>
+                  <p id="pos-change" class="valign-wrapper right">{{context.sixmonths[0][3]}}%</p><img id="change1" src="../static/gain-icon.png" height="20" width="20"></td>
+    
+                </tr>
+              
+                <tr>
+                  
+                  <td><h5 id="crop2">{{context.sixmonths[0][4]}}</h5></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td class="right"><h4 id="price2">₹{{context.sixmonths[0][5]}}</h4>
+                  <p id="neg-change" class="valign-wrapper right">{{context.sixmonths[0][6]}}%</p><img id="change2" src="../static/loss-icon.png" height="20" width="20">
+                    </td>
+                   
+                </tr>
+         
+              </table>
+              <script>
+                function sleep(ms) {
+                  return new Promise(resolve => setTimeout(resolve, ms));
+                 }
+                function updateTime(i){
+                  $('#time').load('http://localhost:5000/ticker/'+0+ '/' + i);
+                }
+    
+                function updateCrop1(i){
+                  $('#crop1').load('http://localhost:5000/ticker/'+ 1 + '/' + i);
+                }
+    
+                function updatePrice1(i){
+                  $('#price1').load('http://localhost:5000/ticker/'+ 2 + '/' + i);
+                }
+    
+                function updateChange1(i){
+                  $("#change1").attr("src","../static/gain-icon.png");
+                  $('#pos-change').load('http://localhost:5000/ticker/'+ 3 + '/'  + i);
+    
+                }
+    
+                function updateCrop2(i){
+                  $('#crop2').load('http://localhost:5000/ticker/'+ 4 + '/'  + i);
+                }
+    
+                function updatePrice2(i){
+                  $('#price2').load('http://localhost:5000/ticker/'+ 5 + '/'  + i);
+                }
+    
+                function updateChange2(i){
+                  $("#change2").attr("src","../static/loss-icon.png");
+                  $('#neg-change').load('http://localhost:5000/ticker/'+ 6 + '/'  + i);
+    
+                }
+              </script>
+    
+                <script>
+                        var i = 0
+                        setInterval(async function(){
+                        i = (i+1)%5;
+                        updateTime(i);
+    
+                        updateCrop1(i);
+                        await sleep(200);
+    
+                        updatePrice1(i);
+                        await sleep(200);
+    
+                        updateChange1(i);
+                        await sleep(200);
+    
+                        updateCrop2(i);
+                        await sleep(200);
+    
+                        updatePrice2(i);
+                        await sleep(200);
+    
+                        updateChange2(i);
+                        await sleep(200);
+    
+                        /*
+                        setTimeout(updateCrop1(i), 100);
+                        setTimeout(updatePrice1(i), 300);
+                        setTimeout(updateChange1(i), 500);
+                        setTimeout(updateCrop2(i), 700);
+                        setTimeout(updatePrice2(i), 800);
+                        setTimeout(updateChange2(i), 900);
+                        */
+    
+                        }, 4000);
+    
+                </script>
+    
+            </div>
+            <img src="../static/images/machine.webp" class="img-fluid robot" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="main_nav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">All Commodity</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href=""><img src="https://img.icons8.com/color/48/000000/male-user.png" alt=""></a>
+                  
+                      </li>
+                      
+                    </ul>
+                    
+                  </div>
+                </div>
+              </nav>
+        </div>
+       <div class="container-fluid">
+        <div class="d-flex current_forecast">
+          <div>
+            <h2>Dashboard</h2>
+          <p>Home/Dashboard</p>
+          </div>
+         
+          <div class="timeDate" >
+            <strong style="margin-bottom:50px!important" class="time"></strong>
+            
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-12 top_gainer_div">
+           <div class="top_gainers">
+            <h3>Top Gainers(Current)</h3>
+            <canvas id="myChart"></canvas>
+        </div>
+           </div>
+          <div class="col-md-6 col-12 top_loser_div">
+          <div class="top_gainers">
+            <h3>Top Losers</h3>
+            <canvas id="topLosers"></canvas>
+          </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-top:20px ;">Explore By Commidity</h3>
+    </div>
+    <div class="row explore">
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/paddy"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt=""></a>
+         <h4>Paddy</h4> 
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/wheat"><img src="https://img.icons8.com/color/48/000000/wheat.png" alt=""></a>
+         <h4>wheat</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/barley"><img src="https://img.icons8.com/color/48/000000/barley.png" alt=""></a>
+         <h4>barley</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/soyabean"><img src="https://img.icons8.com/color/48/000000/soy.png" alt=""></a>
+         <h4>Soya Bean</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/rice-bowl"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt=""></a>
+         <h4>Paddy</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/cotton"><img src="https://img.icons8.com/color/48/000000/cotton.png" alt=""></a>
+         <h4>Cotton</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/copra"><img src="https://img.icons8.com/color/48/000000/coconut.png" alt=""></a>
+         <h4>Coconut</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/groundnut"><img src="https://img.icons8.com/color/48/000000/peanuts.png" alt=""></a>
+         <h4>Ground Nut</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/sugarcane"><img src="https://img.icons8.com/color/48/000000/bamboo.png" alt=""></a>
+         <h4>SugarCane</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/maize"><img src="https://img.icons8.com/color/48/000000/corn.png" alt=""></a>
+         <h4>Maize</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/jute"><img src="https://img.icons8.com/color/48/000000/potato.png" alt=""></a>
+         <h4>Raw Jute</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/sunflower"><img src="https://img.icons8.com/color/48/000000/sunflower.png" alt=""></a>
+         <h4>Sun Flower</h4>
+        </div>
+      </div>
+    </div>
+       </div>
+    </div>
+  </div>
   <div>
-
-
-
-	<div class="nav-wrapper">
+	<!-- <div class="nav-wrapper">
 
 		<h3 class="card-panel #ffd54f amber lighten-2 center valign-wrapper center"><a class="brand-logo  #ffd54f-text text-lighten-4" href="#"><img alt="" src="/static/ApnaAnaajLogo.png" height="100px" width="100px" class="responsive-img" />
-          <span>APNA ANAAJ</span></a>
+          <span>Andaaza</span></a>
           </a></h3><h3>
 
-	</div>
+	</div> -->
 
     <!--
   <h3 class="card-panel #ffd54f amber lighten-2 center valign-wrapper center"><img src="/static/ApnaAnaajLogo.png
 " height="70px" width="70px">Apna Anaaj</h3>
     -->
-
-    <div class="row">
+<!---->
+    <div class="row botttom raw">
     <div class="card-panel col s9">
       <h4 class=" #e0f7fa cyan lighten-5">Top Gainers(Current trends)</h4>
       <table class="striped">
@@ -59,8 +314,8 @@
         <tbody>
         {% for item in context['top5'] %}
           <tr>
-            <td>{{item[0]}}</td>
-            <td>₹{{item[1]}}</td>
+            <td class="commodity_name_grow">{{item[0]}}</td>
+            <td class="commodity_price_price">{{item[1]}}</td>
             <td class="valign-wrapper">{{item[2]}}% <img src="../static/gain-icon.png" height="25" width="25"></td>
           </tr>
         {% endfor %}
@@ -80,8 +335,8 @@
         <tbody>
         {% for item in context['bottom5'] %}
           <tr>
-            <td>{{item[0]}}</td>
-            <td>₹{{item[1]}}</td>
+            <td class="top_loser_name">{{item[0]}}</td>
+            <td class="top_loser_price">{{item[1]}}</td>
             <td class="valign-wrapper">{{item[2]}}% <img src="../static/loss-icon.png" height="25" width="25"></td>
           </tr>
         {% endfor %}
@@ -91,106 +346,12 @@
     </div>
     <div class="col s3">
       <div class="card grey lighten-3">
-        <div class="card-content black-text">
-          <h6>Star Commodity Prediction</h6>
-           <span class="card-title" id="time">{{context.sixmonths[0][0]}}</span>
-          <table class="valign-wrapper">
-            <tr>
-              <td><h5 id="crop1">{{context.sixmonths[0][1]}}</h5></td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <td class="right">
-                  <h4 id="price1">₹{{context.sixmonths[0][2]}}</h4>
-              <p id="pos-change" class="valign-wrapper right">{{context.sixmonths[0][3]}}%</p><img id="change1" src="../static/gain-icon.png" height="20" width="20" style="{margin-left: 5;}"></td>
-
-            </tr>
-            <tr>
-              <td><h5 id="crop2">{{context.sixmonths[0][4]}}</h5></td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <td class="right"><h4 id="price2">₹{{context.sixmonths[0][5]}}</h4>
-              <p id="neg-change" class="valign-wrapper right">{{context.sixmonths[0][6]}}%</p><img id="change2" src="../static/loss-icon.png" height="20" width="20" style="{margin-left: 5;}">
-                </td>
-            </tr>
-          </table>
-          <script>
-            function sleep(ms) {
-              return new Promise(resolve => setTimeout(resolve, ms));
-             }
-            function updateTime(i){
-              $('#time').load('http://localhost:5000/ticker/'+0+ '/' + i);
-            }
-
-            function updateCrop1(i){
-              $('#crop1').load('http://localhost:5000/ticker/'+ 1 + '/' + i);
-            }
-
-            function updatePrice1(i){
-              $('#price1').load('http://localhost:5000/ticker/'+ 2 + '/' + i);
-            }
-
-            function updateChange1(i){
-              $("#change1").attr("src","../static/gain-icon.png");
-              $('#pos-change').load('http://localhost:5000/ticker/'+ 3 + '/'  + i);
-
-            }
-
-            function updateCrop2(i){
-              $('#crop2').load('http://localhost:5000/ticker/'+ 4 + '/'  + i);
-            }
-
-            function updatePrice2(i){
-              $('#price2').load('http://localhost:5000/ticker/'+ 5 + '/'  + i);
-            }
-
-            function updateChange2(i){
-              $("#change2").attr("src","../static/loss-icon.png");
-              $('#neg-change').load('http://localhost:5000/ticker/'+ 6 + '/'  + i);
-
-            }
-          </script>
-
-            <script>
-                    var i = 0
-                    setInterval(async function(){
-                    i = (i+1)%5;
-                    updateTime(i);
-
-                    updateCrop1(i);
-                    await sleep(200);
-
-                    updatePrice1(i);
-                    await sleep(200);
-
-                    updateChange1(i);
-                    await sleep(200);
-
-                    updateCrop2(i);
-                    await sleep(200);
-
-                    updatePrice2(i);
-                    await sleep(200);
-
-                    updateChange2(i);
-                    await sleep(200);
-
-                    /*
-                    setTimeout(updateCrop1(i), 100);
-                    setTimeout(updatePrice1(i), 300);
-                    setTimeout(updateChange1(i), 500);
-                    setTimeout(updateCrop2(i), 700);
-                    setTimeout(updatePrice2(i), 800);
-                    setTimeout(updateChange2(i), 900);
-                    */
-
-                    }, 4000);
-
-            </script>
-
-        </div>
+        
       </div>
 
     </div>
   </div>
-  <h5>Explore by commodity</h5>
+  <!-- <h5>Explore by commodity</h5>
   <div class="row">
     <div class="col s3">
       <a href="http://localhost:5000/commodity/paddy" style="color: #000000">
@@ -513,15 +674,21 @@
       </div>
     </a>
     </div>
-  </div>
+  </div> -->
 
-<script type="text/javascript" charset="utf-8">
+<!-- <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
     $('.slider').slider({full_width :true});
   });
-</script>
+</script> -->
   </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../static//main.js"></script>
 
 </html>
