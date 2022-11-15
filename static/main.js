@@ -1,5 +1,4 @@
 //sidebar code
-
 const gainers = document.getElementById('myChart').getContext('2d');
 const losers = document.getElementById('topLosers').getContext('2d');
 const time = document.querySelector(".time")
@@ -7,6 +6,7 @@ const name_grow =  document.querySelectorAll(".commodity_name_grow")
 const price_grow = document.querySelectorAll(".commodity_price_price")
 const name_loose = document.querySelectorAll(".top_loser_name")
 const price_loose = document.querySelectorAll(".top_loser_price")
+//const time_commo = document.querySelectorAll(".time_commo")
 //getting name_grow
 let productArr = []
 for (let val = 0; val < name_grow.length; val++) {
@@ -118,4 +118,41 @@ function getDate() {
 }
 setInterval(() => {
     time.textContent = getDate()
+    time_commo.textContent = getDate()
 }, 1000);
+
+//growing line
+const grow = document.querySelector(".grow_line")
+const growingLine = new Chart(grow, {
+    type: 'line',
+    data: {
+        
+        labels: productArr,
+        datasets: [{
+            borderColor: Utils.CHART_COLORS.red,
+            borderWidth: 1,
+            radius: 0,
+            data: data,
+          },
+          {
+            borderColor: Utils.CHART_COLORS.blue,
+            borderWidth: 1,
+            radius: 0,
+            data: data2,
+          }]
+    },
+    options: {
+        animation,
+        interaction: {
+          intersect: false
+        },
+        plugins: {
+          legend: false
+        },
+        scales: {
+          x: {
+            type: 'linear'
+          }
+        }
+      }
+});

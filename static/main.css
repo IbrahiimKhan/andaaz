@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;300;500;700&family=Nunito:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Gothic A1', sans-serif;
-font-family: 'Nunito', sans-serif;
+    font-family: 'Comfortaa', cursive!important;
+    font-family: 'Hind Siliguri', sans-serif;
+    
 }
 .top_gainers{
     padding:10px ;
@@ -18,10 +19,10 @@ font-family: 'Nunito', sans-serif;
     text-align: center;
 }
 h1,h2{
-    color: blue;
+    color: #ff0077;
 }
 .logo{
-color: blue;
+color: #ff0077;
 margin-top: 40px;
 font-size: 40px;
 font-weight: bolder;
@@ -38,23 +39,23 @@ text-align: center;
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: blue !important;
-    border-color: blue!important;
+    background-color: #ff0077 !important;
+    border-color: #ff0077!important;
 }
 input.form-control.me-2 {
-    border: 0.1px solid blue;
+    border: 0.1px solid #ff0077;
     border-radius: 0!important;
 }
 .btn-outline-success {
     color: #fff!important;
-    border-color: blue!important;
+    border-color: #ff0077!important;
     border-radius: 0!important;
-    background: blue!important;
+    background: #ff0077!important;
 
 
 }
 .btn-outline-success:hover{
-    background-color: blue;
+    background-color: #ff0077;
     color: #fff;
 }
 ul.navbar-nav.ms-auto.mb-2.mb-lg-0 {
@@ -105,8 +106,9 @@ table td{
 #time{
     padding-left: 10px;
 }
-.explore{
-    margin-bottom: 10px;
+.explore {
+
+    padding-bottom: 10px;
 }
 strong.time {
     font-weight: 200;
@@ -132,11 +134,63 @@ strong.time {
     background-color: #fff!important;
 }
 .main_commo_img img {
-    width: 500px!important;
+    width: 100%!important;
+margin-top: 25px;
 }
 .info_box {
     padding: 10px;
+}
+.col-md-6.my_chart{
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    height: 312px;
-    font-size: 20px;
+}
+.my_chart {
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+}
+img.make_small {
+    width: 50px;
+    height: 50px;
+}
+b{
+    font-weight: 100;
+}
+.container.main_wrapper {
+    background: rgb(255,255,255);
+}
+/* media queries */
+.actual_wrapper{
+    height: 650px!important;
+}
+.row.commo_row {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.inner_div_home {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+img.img-fluid.img-side {
+    height: 236px;
+    transform: scaleX(-1);
+}
+img.modal_img {
+    width: 252px;
+    float: right;
+    margin-bottom: -30px;
+    margin-top: -110px;
+
+}
+@media (min-width: 1400px){
+.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1400px;
+   
+}.modal-dialog{
+    max-width: 900px!important;
+}
 }

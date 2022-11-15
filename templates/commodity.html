@@ -16,7 +16,7 @@
 <body >
 
   <div class="main">
-    <div class="container main_wrapper">
+    <div class="container actual_wrapper main_wrapper">
       <div class="row">
         <div class="col-3 sidebar ">
           <div class="">
@@ -36,8 +36,10 @@
               </div> -->
               <div class="card-content black-text">
                 <h6 class="list-group-item list-group-item-action active" >Live Prediction</h6>
-             
-              <img src="../static/images/machine.webp" class="img-fluid robot" alt="">
+                <div class="main_commo_img">
+                  <img src={{context.image_url}}>
+                </div>
+                <img src="../static/images/main_robot_dribble_icon_1.gif"  class="img-fluid img-side" alt="">
             </div>
           </div>
         </div>
@@ -45,7 +47,7 @@
         <div class="col-9">
           <div class="main_nav">
               <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                  <div class="container-fluid">
+                  <div class="container">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -71,137 +73,358 @@
                   </div>
                 </nav>
           </div>
-         <div class="container-fluid">
+         <div class="container">
           <div class="d-flex current_forecast">
             <div>
-              <h2>Dashboard</h2>
-            <p>Home/Dashboard</p>
+              <h2>Dashboard</h2></a>
+             <div class="d-flex">
+              <a style="text-decoration: none" style="color: #ff0077;" href="http://localhost:5000/"><p  style="color: #ff0077;">Home/</p></a>
+              <strong>{{context.name}}</strong>
+             </div>
             </div>
-           
             <div class="timeDate" >
-              <strong style="margin-bottom:50px!important" class="time"></strong>
+              <strong style="margin-bottom:50px!important" class="time_commo"></strong>
               
             </div>
+            <script>
+              const time_commo =document.querySelector(".time_commo")
+              function getDate_commo() {
+    let dateArray = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+        
+    ]
+    let time = dateFns.format(new Date(),"hh:mm:ssa")
+    let day = dateArray[dateFns.getDay(new Date())]
+    return ` ${day} ${time}`
+}
+setInterval(() => {
+    time_commo.textContent = getDate_commo()
+}, 1000);
+
+            </script>
         </div>
     </div>
-   
-    <h2 class="header">{{context.name}}</h2>
-    <div class="row">
-        <div class="">
-      <div class="  d-flex align-items-center justify-content-center">
-        <div class="main_commo_img">
-          <img src={{context.image_url}}>
-        </div>
-        <div class="card-image">
-          <div class="">
-            <div class="info_box">
+    <div class="row commo_row">
+      <div class="col-md-6 overfl">
+        <div class="info_box">
+          <table>
+            <h2 class="header">{{context.name}}</h2>
+            <tr>
+              <td  style="color: #ff0077;">Current Price</td>
+              <td><b> {{context.current_price}} / ql</b></td>
+            </tr>
+            <tr>
+              <td>Prime Location</td>
+              <td><b>{{context.prime_loc}}</b></td>
+            </tr>
+            <tr>
+              <td>Crop Type</td>
+              <td><b>{{context.type_c}}</b></td>
+            </tr>
+            <tr>
+              <td>Export</td>
+              <td><b>{{context.export}}</b></td>
+            </tr>
+          </table>
+         
               <table>
+               <tr>
+                <td  style="color: #ff0077;"> <span class="">Brief Forecast</span></td>
+               </tr>
                 <tr>
-                  <td>Current Price</td>
-                  <td><b> {{context.current_price}} / ql</b></td>
+                  <td><p>Min. crop price time</p>
+                  <td><h5>{{context.min_crop[0]}}</h5></td>
+                  <td>
+                    <h4>৳{{context.min_crop[1]}}</h4>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Prime Location</td>
-                  <td><b>{{context.prime_loc}}</b></td>
-                </tr>
-                <tr>
-                  <td>Crop Type</td>
-                  <td><b>{{context.type_c}}</b></td>
-                </tr>
-                <tr>
-                  <td>Export</td>
-                  <td><b>{{context.export}}</b></td>
+                  <td><p>Max. crop price time</p>
+                  <td><h5>{{context.max_crop[0]}}</h5></td>
+                  <td>
+                    <h4>৳{{context.max_crop[1]}}</h4>
+                  </td>
                 </tr>
               </table>
-              <div class="card grey lighten-3">
-                <div class="card-content black-text">
-                   <span class="card-title">Brief Forecast</span>
-                  <table>
+        </div>
+        <div class="card-image my_chart">
+          <div class="d-flex">
+            
+            <div class="brief_info_up_down">
+              <div class="col s4">
+               <table class="table table-bordered">
+                  <thead class="text-center">
+                    <strong class="text-center">Forecast Trends</strong>
+                  </thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>Price (per Qtl.)</th>
+                    <th>Change</th>
+                </tr>
+                  <tbody>
+                  {% for item in context.forecast_values %}
                     <tr>
-                      <td><p>Min. crop price time</p>
-                      <td><h5>{{context.min_crop[0]}}</h5></td>
-                      <td>
-                        <h4>৳{{context.min_crop[1]}}</h4>
-                      </td>
+                      <td class="trends_name">{{item[0]}}</td>
+                      <td class="brief_data">{{item[1]}}</td>
+                      <td class="valign-wrapper">{{item[2]}}% {% if item[2]>=0 %}<img src= "../static/gain-icon.png" height="25" width="25">{% else %}<img src= "../static/loss-icon.png" height="25" width="25">{% endif %}</td>
                     </tr>
-                    <tr>
-                      <td><p>Max. crop price time</p>
-                      <td><h5>{{context.max_crop[0]}}</h5></td>
-                      <td>
-                        <h4>৳{{context.max_crop[1]}}</h4>
-                      </td>
-                    </tr>
-                  </table>
-        
-                </div>       
-              </div>
+                  {% endfor %}
+                  </tbody>
+                </table>
+          </div>
             </div>
           </div>
         </div>
-        
       </div>
+       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+      <div class="col-md-6 overfl">
+      <div class="my_chart">
+        <canvas id="chartjs-0" class="chartjs">
+        </canvas>
+      </div>
+      <script>
+       function getValue(params) {
+        //console.log(params)
+        let valueHolder = []
+        params.forEach(value => {
+          valueHolder.push((Number(value)/100).toFixed(2))
+          
+        });
+       // console.log("array",valueHolder)
+        return valueHolder
+       }
+      const valueNext =  getValue({{context.forecast_y}})
+        new Chart(document.getElementById("chartjs-0"),
+        {
+        type: 'line',
+    data:{
+    labels: {{context.forecast_x|safe}},
+    datasets: [{
+      label: 'Next year price',
+      data:valueNext,
+      fill: false,
+      borderColor: 'blue',
+    }]
+  
+    },
+    options: {
+      animations: {
+        tension: {
+          duration: 500,
+          easing: 'linear',
+          from: 1,
+          to: 0,
+          loop: true
+        }
+      },
+      scales: {
+        y: { // defining min and max so hiding the dataset does not change scale range
+          min: Math.min(...valueNext)-1,
+          max: Math.max(...valueNext)+1
+        }
+      }
+    }
+    
+      }
+  
+        );</script>
+        <div class="my_chart">
+          <canvas id="chartjs-1" class="chartjs">
+          </canvas>
+        </div>
+        <script>
+          function getValue(params) {
+           //console.log(params)
+           let valueHolder = []
+           params.forEach(value => {
+             valueHolder.push((Number(value)/100).toFixed(2))
+             
+           });
+          // console.log("array",valueHolder)
+           return valueHolder
+          }
+         const valuePrev =  getValue({{context.previous_y}})
+           new Chart(document.getElementById("chartjs-1"),
+           {
+           type: 'line',
+       data:{
+       labels: {{context.previous_x|safe}},
+       datasets: [{
+         label: 'Previous year price',
+         data:valuePrev,
+         fill: false,
+         borderColor: '#ff3946',
+       }]
+     
+       },
+       options: {
+         animations: {
+           tension: {
+             duration: 1000,
+             easing: 'linear',
+             from: 1,
+             to: 0,
+             loop: true
+           }
+         },
+         scales: {
+           y: { // defining min and max so hiding the dataset does not change scale range
+             min: Math.min(...valuePrev)-1,
+             max: Math.max(...valuePrev)+1
+           }
+         }
+       }
+       
+         }
+     
+           );</script>
+
+
+ <div class="">
+      <div class="my_chart">
+        <canvas id="myChart"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="text/javascript">
+          const data = [];
+      const data2 = [];
+      let prev =Math.min(...valuePrev)-1 ;
+      //console.log("prev value is"+prev)
+      let prev2 = Math.min(...valueNext)-1;
+      let destination = Math.max(...valueNext)>Math.max(...valuePrev)?Math.max(...valueNext)*100:Math.max(...valuePrev)*100
+      console.log(destination)
+      for (let i = 0; i < Math.max(...valuePrev)*100; i++) {
+        prev += 5 - Math.random() * 10;
+        data.push({x: i, y: prev});
+     
+      }
+      console.log(data.slice(0,100))
+      for (let i = 0; i <Math.max(...valueNext)*100; i++) {
+        prev2 += 5 - Math.random() * 10;
+        data2.push({x: i, y: prev2});
+      }
+      console.log(data2.slice(1,100))
+      const totalDuration = 10000;
+      const delayBetweenPoints = totalDuration / data.length;
+      const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+      const ctx = document.querySelector("#myChart")
+      
+      
+          const my_chart = new Chart(ctx,{
+      
+              type: 'line',
+        data: {
+          datasets: [{
+            borderColor: "#ff3946",
+            borderWidth: 1,
+            radius: 0,
+            data: data,
+          },
+          {
+            borderColor: "blue",
+            borderWidth: 1,
+            radius: 0,
+            data: data2,
+          }]
+        },
+        options: {
+          animation:{
+        x: {
+          type: 'number',
+          easing: 'linear',
+          duration: delayBetweenPoints,
+          from: NaN, // the point is initially skipped
+          delay(ctx) {
+            if (ctx.type !== 'data' || ctx.xStarted) {
+              return 0;
+            }
+            ctx.xStarted = true;
+            return ctx.index * delayBetweenPoints;
+          }
+        },
+        y: {
+          type: 'number',
+          easing: 'linear',
+          duration: delayBetweenPoints,
+          from: previousY,
+          delay(ctx) {
+            if (ctx.type !== 'data' || ctx.yStarted) {
+              return 0;
+            }
+            ctx.yStarted = true;
+            return ctx.index * delayBetweenPoints;
+          }
+        }
+      },
+          interaction: {
+            intersect: false
+          },
+          plugins: {
+            legend: false
+          },
+          scales: {
+            x: {
+              type: 'linear'
+            }
+          }
+        }
+      
+          })
+      </script>
+    </div>
+    <div class="div my_chart">
+      <canvas id="brief_forecast"></canvas>
+      <script>
+        const brief = document.querySelector("#brief_forecast")
+        const brief_name = document.querySelectorAll(".trends_name")
+        const brief_data = document.querySelectorAll(".brief_data")
+        const name = []
+        for (let val = 0; val < brief_name.length; val++) {
+            name.push(brief_name[val].textContent)
+        }
+        const price=[]
+        for (let val = 0; val < brief_data.length; val++) {
+            price.push(brief_data[val].textContent)
+            
+        }
+       console.log(price)
+       console.log("brief name: "+ brief_name)
+        const brief_Chart = new Chart(brief,{
+          type: 'line',
+          data:{
+          labels:name,
+          datasets: [
+            {
+              label: 'ForeCast Trends',
+              data:price,
+              borderColor: "rgb(255,57,70,0.8)",
+              backgroundColor:'rgb(255,57,70,0.6)',
+              pointRadius: 7,
+              pointHoverRadius: 7
+            }
+          ]
+        },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+              }
+            }
+          },
+          
+          
+        })
+      </script>
+    </div>
     </div>
     
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  
-      <div class="col-md-6">
-      <canvas id="chartjs-0" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
-    height:400px !important;">
-      </canvas>
-    <script>
-      new Chart(
-      document.getElementById("chartjs-0"),{"type":"line","data":{"labels":{{context.forecast_x|safe}},"datasets":[{"label":"Next year Price","data":{{context.forecast_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-          yAxes: [{
-              display: true,
-              ticks: {
-                  suggestedMin: 1000,
-                  stepSize : 200
-              }
-          }]
-      }}});</script>
-    </div>
-    <div class="col-md-6">
-      <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined" style=" width:800px !important;
-    height:400px !important;">
-      </canvas>
-    <script>
-      new Chart(document.getElementById("chartjs-1"),{"type":"line","data":{"labels":{{context.previous_x|safe}},"datasets":[{"label":"Previous year price","data":{{context.previous_y}},"fill":false,"borderColor":"rgb(75, 192, 192)","lineTension":0.1}]},"options":{ responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-          yAxes: [{
-              display : true,
-              ticks: {
-                  suggestedMin : 1000,
-                  stepSize : 200
-              }
-          }]
-      }}});</script>
-    </div>
-    <div class="brief_info_up_down">
-      <div class="col s4">
-        <h5>Forecast Trends</h5>
-       <table class="striped">
-          <thead>
-            <tr>
-                <th>Month</th>
-                <th>Price (per Qtl.)</th>
-                <th>Change</th>
-            </tr>
-          </thead>
-  
-          <tbody>
-          {% for item in context.forecast_values %}
-            <tr>
-              <td>{{item[0]}}</td>
-              <td>৳{{item[1]}}</td>
-              <td class="valign-wrapper">{{item[2]}}% {% if item[2]>=0 %}<img src= "../static/gain-icon.png" height="25" width="25">{% else %}<img src= "../static/loss-icon.png" height="25" width="25">{% endif %}</td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-  </div>
     </div>
   
   </div>
@@ -211,9 +434,8 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../static//main.js"></script>
 </body>
 </html>

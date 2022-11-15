@@ -2,33 +2,11 @@
 <html>
 <head>
   <title>Andaaj</title>
-  <!-- Compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/main.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <!-- <style>
-        div.main {
-            padding: 5px 50px 75px 50px;
-        }
-
-        span,img {
-            vertical-align: middle;
-         }
-
-        .brand-logo > span,.brand-logo > img {
-            vertical-align: middle;
-        }
-
-
-    </style> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-         -->
 </head>
 <body class="main">
-  <div class="container main_wrapper">
+  <div class="container actual_wrapper main_wrapper home">
     <div class="row">
       <div class="col-3 sidebar ">
         <div class="">
@@ -38,16 +16,9 @@
           <h2 class="logo">Andaaz</h2>
           </div>
           <div class="menus">
-            <!-- <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                Live Forecasting
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">Browse Commodity</a>
-              <a href="#" class="list-group-item list-group-item-action">Paddy</a>
-              <a href="#" class="list-group-item list-group-item-action">Soya Bean</a>
-            </div> -->
             <div class="card-content black-text">
-              <h6 class="list-group-item list-group-item-action active" >Live Prediction</h6>
+              <h6 class="list-group-item list-group-item-action active" >Commodity price predictor</h6>
+              <h6 class="list-group-item list-group-item-action " data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="cursor: pointer;font-weight: 900;" >Browse All</h6>
                <span class="card-title" id="time">{{context.sixmonths[0][0]}}</span>
               <table class="valign-wrapper ">
                 <tr>
@@ -145,14 +116,14 @@
                 </script>
     
             </div>
-            <img src="../static/images/machine.webp" class="img-fluid robot" alt="">
+            <img src="../static/images/tumblr_pe7t060ArP1sjd86qo1_1280.gif" class="img-fluid" alt="">
           </div>
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-9 ">
         <div class="main_nav">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
+                <div class="container-fluid ">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -166,7 +137,108 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">All Commodity</a>
+                        <a style="cursor: pointer;" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">All Commodity</a>
+                        <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">All Commodity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row explore">
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/paddy"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt="" class="make_small"></a>
+             <h4>Rice</h4> 
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/wheat"><img src="https://img.icons8.com/color/48/000000/wheat.png" alt="" class="make_small"></a>
+             <h4>wheat</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/barley"><img src="https://img.icons8.com/color/48/000000/barley.png" alt="" class="make_small"></a>
+             <h4>barley</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/soyabean"><img src="https://img.icons8.com/color/48/000000/soy.png" alt="" class="make_small"></a>
+             <h4>Soya Bean</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/rape"><img src="https://img.icons8.com/color/48/000000/seed.png" alt="" class="make_small"></a>
+             <h4>rape</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/copra"><img src="https://img.icons8.com/color/48/000000/coconut.png" alt="" class="make_small"></a>
+             <h4>Coconut</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/groundnut"><img src="https://img.icons8.com/color/48/000000/peanuts.png" alt="" class="make_small"></a>
+             <h4>Ground Nut</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/sugarcane"><img src="https://img.icons8.com/color/48/000000/bamboo.png" alt="" class="make_small"></a>
+             <h4>SugarCane</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/maize"><img src="https://img.icons8.com/color/48/000000/corn.png" alt="" class="make_small"></a>
+             <h4>Corn</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/jute"><img src="https://img.icons8.com/color/48/000000/potato.png" alt="" class="make_small"></a>
+             <h4>Raw Jute</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/gram"><img src="https://thumbs.dreamstime.com/b/heap-black-chickpeas-kala-chana-isolated-white-background-159011258.jpg" alt="" class="make_small"></a>
+             <h4>Pulse</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/moong"><img src="https://cdn.shopify.com/s/files/1/0588/8324/4193/products/loose-moong-dal-1-kg-0-20210702_669x669.jpg?v=1637840862" alt="" class="make_small"></a>
+             <h4>Moog Dal</h4>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-12">
+            <div class="products ">
+             <a href="http://localhost:5000/commodity/masoor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpDnJObKdnu7lD4HOHexZ4GUcLihqOCVlPgn2g1uWYIJbN-yYtfUjtQ0bqAnbfU4WgEyk&usqp=CAU" alt="" class="make_small"></a>
+             <h4>Masoor Dal</h4>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+      <div>
+        <img src="../static//images/794179300b5f014610c07cacbb2bbfdb.gif" alt="" class="modal_img">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn " style="background-color: #ff0077;color:white" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
                       </li>
                       <li class="nav-item">
                         <a href=""><img src="https://img.icons8.com/color/48/000000/male-user.png" alt=""></a>
@@ -179,7 +251,8 @@
                 </div>
               </nav>
         </div>
-       <div class="container-fluid">
+       <div class="container-fluid ">
+
         <div class="d-flex current_forecast">
           <div>
             <h2>Dashboard</h2>
@@ -191,6 +264,7 @@
             
           </div>
       </div>
+      <div class="inner_div_home">
       <div class="row">
           <div class="col-md-6 col-12 top_gainer_div">
            <div class="top_gainers">
@@ -200,7 +274,7 @@
            </div>
           <div class="col-md-6 col-12 top_loser_div">
           <div class="top_gainers">
-            <h3>Top Losers</h3>
+            <h3>Top Losers(Current)</h3>
             <canvas id="topLosers"></canvas>
           </div>
       </div>
@@ -211,77 +285,84 @@
     <div class="row explore">
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/paddy"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt=""></a>
-         <h4>Paddy</h4> 
+         <a href="http://localhost:5000/commodity/paddy"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt="" class="make_small"></a>
+         <h4>Rice</h4> 
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/wheat"><img src="https://img.icons8.com/color/48/000000/wheat.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/wheat"><img src="https://img.icons8.com/color/48/000000/wheat.png" alt="" class="make_small"></a>
          <h4>wheat</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/barley"><img src="https://img.icons8.com/color/48/000000/barley.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/barley"><img src="https://img.icons8.com/color/48/000000/barley.png" alt="" class="make_small"></a>
          <h4>barley</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/soyabean"><img src="https://img.icons8.com/color/48/000000/soy.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/soyabean"><img src="https://img.icons8.com/color/48/000000/soy.png" alt="" class="make_small"></a>
          <h4>Soya Bean</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/rice-bowl"><img src="https://img.icons8.com/color/48/000000/rice-bowl.png" alt=""></a>
-         <h4>Paddy</h4>
+         <a href="http://localhost:5000/commodity/rape"><img src="https://img.icons8.com/color/48/000000/seed.png" alt="" class="make_small"></a>
+         <h4>rape</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/cotton"><img src="https://img.icons8.com/color/48/000000/cotton.png" alt=""></a>
-         <h4>Cotton</h4>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-6 col-12">
-        <div class="products ">
-         <a href="http://localhost:5000/commodity/copra"><img src="https://img.icons8.com/color/48/000000/coconut.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/copra"><img src="https://img.icons8.com/color/48/000000/coconut.png" alt="" class="make_small"></a>
          <h4>Coconut</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/groundnut"><img src="https://img.icons8.com/color/48/000000/peanuts.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/groundnut"><img src="https://img.icons8.com/color/48/000000/peanuts.png" alt="" class="make_small"></a>
          <h4>Ground Nut</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/sugarcane"><img src="https://img.icons8.com/color/48/000000/bamboo.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/sugarcane"><img src="https://img.icons8.com/color/48/000000/bamboo.png" alt="" class="make_small"></a>
          <h4>SugarCane</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/maize"><img src="https://img.icons8.com/color/48/000000/corn.png" alt=""></a>
-         <h4>Maize</h4>
+         <a href="http://localhost:5000/commodity/maize"><img src="https://img.icons8.com/color/48/000000/corn.png" alt="" class="make_small"></a>
+         <h4>Corn</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/jute"><img src="https://img.icons8.com/color/48/000000/potato.png" alt=""></a>
+         <a href="http://localhost:5000/commodity/jute"><img src="https://img.icons8.com/color/48/000000/potato.png" alt="" class="make_small"></a>
          <h4>Raw Jute</h4>
         </div>
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/sunflower"><img src="https://img.icons8.com/color/48/000000/sunflower.png" alt=""></a>
-         <h4>Sun Flower</h4>
+         <a href="http://localhost:5000/commodity/gram"><img src="https://www.un.org/sites/un2.un.org/files/pulses_ok_0.png" alt="" class="make_small"></a>
+         <h4>Pulse</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/moong"><img src="https://cdn.shopify.com/s/files/1/0588/8324/4193/products/loose-moong-dal-1-kg-0-20210702_669x669.jpg?v=1637840862" alt="" class="make_small"></a>
+         <h4>Moog Dal</h4>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-6 col-12">
+        <div class="products ">
+         <a href="http://localhost:5000/commodity/masoor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpDnJObKdnu7lD4HOHexZ4GUcLihqOCVlPgn2g1uWYIJbN-yYtfUjtQ0bqAnbfU4WgEyk&usqp=CAU" alt="" class="make_small"></a>
+         <h4>Masoor Dal</h4>
         </div>
       </div>
     </div>
+  </div>
        </div>
     </div>
   </div>
@@ -303,14 +384,6 @@
     <div class="card-panel col s9">
       <h4 class=" #e0f7fa cyan lighten-5">Top Gainers(Current trends)</h4>
       <table class="striped">
-        <thead>
-          <tr>
-              <th>Item Name</th>
-              <th>Price (per Qtl.)</th>
-              <th>Change</th>
-          </tr>
-        </thead>
-
         <tbody>
         {% for item in context['top5'] %}
           <tr>
@@ -354,10 +427,7 @@
   
   </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../static//main.js"></script>

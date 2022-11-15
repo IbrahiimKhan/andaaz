@@ -6,14 +6,53 @@ import pandas as pd
 from datetime import datetime
 import crops
 import random
-import pymongo as py
-
-# import matplotlib.pyplot as plt
-
+import pymongo
+from pymongo import MongoClient
+import os
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+#connecting to db
+client = MongoClient('localhost', 27017)
+db = client.dataset
+#getting data from db
+def getDataFromDb(data,fileName):
+    cursor = data.find()
+    mongo_docs = list(cursor)
+#print(mongo_docs)
+    print ("total docs:", len(mongo_docs))
+    docs = pd.DataFrame(columns=[])
+    for num, doc in enumerate(mongo_docs):
+        doc["_id"] = str(doc["_id"])
+        doc_id = doc["_id"]
+        series_obj = pd.Series( doc, name=doc_id )
+        docs = docs.append(series_obj)
+    docs.to_csv(os.path.join('./static',fileName)) # CSV
+    csv_export = docs.to_csv(sep=",",path_or_buf="../static")
+    return csv_export
+
+getDataFromDb(db.arhar,"Arhar.csv")
+getDataFromDb(db.bajra,"Bajra.csv")
+getDataFromDb(db.barley,"Barley.csv")
+getDataFromDb(db.copra,"Copra.csv")
+getDataFromDb(db.cotton,"Cotton.csv")
+getDataFromDb(db.gram,"Gram.csv")
+getDataFromDb(db.groundnut,"Groundnut.csv")
+getDataFromDb(db.jowar,"Jowar.csv")
+getDataFromDb(db.jute,"Jute.csv")
+getDataFromDb(db.maize,"Maize.csv")
+getDataFromDb(db.masoor,"Masoor.csv")
+getDataFromDb(db.moong,"Moong.csv")
+getDataFromDb(db.niger,"Niger.csv")
+getDataFromDb(db.paddy,"Paddy.csv")
+getDataFromDb(db.ragi,"Ragi.csv")
+getDataFromDb(db.rape,"Rape.csv")
+getDataFromDb(db.soyabean,"Soyabean.csv")
+getDataFromDb(db.sugarcane,"Sugarcane.csv")
+getDataFromDb(db.sunflower,"Sunflower.csv")
+getDataFromDb(db.urad,"Urad.csv")
+getDataFromDb(db.wheat,"Wheat.csv")
 
 cors = CORS(app, resources={r"/ticker": {"origins": "http://localhost:port"}})
 
@@ -23,7 +62,6 @@ commodity_dict = {
     "barley": "static/Barley.csv",
     "copra": "static/Copra.csv",
     "cotton": "static/Cotton.csv",
-    "sesamum": "static/Sesamum.csv",
     "gram": "static/Gram.csv",
     "groundnut": "static/Groundnut.csv",
     "jowar": "static/Jowar.csv",
@@ -35,7 +73,6 @@ commodity_dict = {
     "ragi": "static/Ragi.csv",
     "rape": "static/Rape.csv",
     "jute": "static/Jute.csv",
-    "safflower": "static/Safflower.csv",
     "soyabean": "static/Soyabean.csv",
     "sugarcane": "static/Sugarcane.csv",
     "sunflower": "static/Sunflower.csv",
@@ -50,7 +87,6 @@ base = {
     "Barley": 980,
     "Copra": 5100,
     "Cotton": 3600,
-    "Sesamum": 4200,
     "Gram": 2800,
     "Groundnut": 3700,
     "Jowar": 1520,
@@ -61,7 +97,6 @@ base = {
     "Ragi": 1500,
     "Rape": 2500,
     "Jute": 1675,
-    "Safflower": 2500,
     "Soyabean": 2200,
     "Sugarcane": 2250,
     "Sunflower": 3700,
@@ -74,12 +109,13 @@ commodity_list = []
 class Commodity:
 
     def __init__(self, csv_name):
+        #print(self)
         self.name = csv_name
-        # print(csv_name)
+       # print(csv_name)#reading all collection name like paddy
+        #print(self.name)#reading all collection name like paddy
         dataset = pd.read_csv(csv_name)
-        self.X = dataset.iloc[:, :-1].values
-        self.Y = dataset.iloc[:, 3].values
-
+        self.X = dataset.iloc[:,2:-1].values
+        self.Y = dataset.iloc[:, 5].values#wpi column
         #from sklearn.model_selection import train_test_split
         #X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1, random_state=0)
         # Fitting decision tree regression to dataset
@@ -92,6 +128,7 @@ class Commodity:
         # fask=regressor_tree.predict(fsa)
 
     def getPredictedValue(self, value):
+        #print(self)
         if value[1]>=2019:
             fsa = np.array(value).reshape(1, 3)
             #print(" ",self.regressor.predict(fsa)[0])
@@ -172,7 +209,7 @@ def ticker(item, number):
         context = '৳' + context
     elif i == 3 or i == 6:
 
-        context = context + '%'
+        context = (context/100) + '%'
 
     #print('context: ', context)
     return context
@@ -429,8 +466,6 @@ if __name__ == "__main__":
     commodity_list.append(copra)
     cotton = Commodity(commodity_dict["cotton"])
     commodity_list.append(cotton)
-    sesamum = Commodity(commodity_dict["sesamum"])
-    commodity_list.append(sesamum)
     gram = Commodity(commodity_dict["gram"])
     commodity_list.append(gram)
     groundnut = Commodity(commodity_dict["groundnut"])
@@ -453,8 +488,6 @@ if __name__ == "__main__":
     commodity_list.append(rape)
     jute = Commodity(commodity_dict["jute"])
     commodity_list.append(jute)
-    safflower = Commodity(commodity_dict["safflower"])
-    commodity_list.append(safflower)
     soyabean = Commodity(commodity_dict["soyabean"])
     commodity_list.append(soyabean)
     sugarcane = Commodity(commodity_dict["sugarcane"])
