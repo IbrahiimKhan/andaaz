@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+port = int(os.environ.get('PORT', 5000))
 #connecting to db
 client = MongoClient('localhost', 27017)
 db = client.dataset
@@ -499,7 +500,7 @@ if __name__ == "__main__":
     wheat = Commodity(commodity_dict["wheat"])
     commodity_list.append(wheat)
 
-app.run(debug=True)
+app.run(host='0.0.0.0', port=port, debug=True)
 
 
 
