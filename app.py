@@ -9,6 +9,9 @@ import random
 import pymongo
 from pymongo import MongoClient
 import os
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
