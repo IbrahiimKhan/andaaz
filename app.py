@@ -166,8 +166,7 @@ def index():
         "sixmonths": SixMonthsForecast()
     }
     return render_template('index.html', context=context)
-
-
+    
 @app.route('/commodity/<name>')
 def crop_profile(name):
     max_crop, min_crop, forecast_crop_values = TwelveMonthsForecast(name)
@@ -238,7 +237,7 @@ def TopFiveWinners():
     sorted_change.sort(reverse=True)
     # print(sorted_change)
     to_send = []
-    for j in range(0, 5):
+    for j in range(0, 7):
         perc, i = sorted_change[j]
         name = commodity_list[i].getCropName().split('/')[1]
         to_send.append([name, round((current_month_prediction[i] * base[name]) / 100, 2), round(perc, 2)])
@@ -265,7 +264,7 @@ def TopFiveLosers():
     sorted_change = change
     sorted_change.sort()
     to_send = []
-    for j in range(0, 5):
+    for j in range(0, 7):
         perc, i = sorted_change[j]
         name = commodity_list[i].getCropName().split('/')[1]
         to_send.append([name, round((current_month_prediction[i] * base[name]) / 100, 2), round(perc, 2)])
