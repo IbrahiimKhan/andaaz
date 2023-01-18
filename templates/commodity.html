@@ -31,6 +31,27 @@
                 <div class="main_commo_img">
                   <img src={{context.image_url}}>
                 </div>
+                <table class="ajaira">
+                  <tr>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                  </tr>
+                  <tr>
+                      <td><p>Min. crop time</p>
+                      <td><h5 class="main_hifive">{{context.min_crop[0]}}</h5></td>
+                      <td><h4>৳{{context.min_crop[1]}}</h4></td>
+                  </tr>
+                  <tr>
+                      <td><p>Max. crop time</p>
+                      <td><h5 class="main_hifive">{{context.max_crop[0]}}</h5></td>
+                      <td>
+                        <h4>৳{{context.max_crop[1]}}</h4>
+                      </td>
+                  </tr>
+                  
+                 </table>
+                
                 <img src="../static/images/main_robot_dribble_icon_1.gif"  class="img-fluid img-side" alt="">
             </div>
           </div>
@@ -123,29 +144,9 @@ setInterval(() => {
               <td>Export</td>
               <td><b>{{context.export}}</b></td>
             </tr>
-          </table>
-         
-              <table>
-               <tr>
-                <td  style="color: #ff0077;"> <span class="">Brief Forecast</span></td>
-               </tr>
-                <tr>
-                  <td><p>Min. crop price time</p>
-                  <td><h5>{{context.min_crop[0]}}</h5></td>
-                  <td>
-                    <h4>৳{{context.min_crop[1]}}</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td><p>Max. crop price time</p>
-                  <td><h5>{{context.max_crop[0]}}</h5></td>
-                  <td>
-                    <h4>৳{{context.max_crop[1]}}</h4>
-                  </td>
-                </tr>
-              </table>
+          </table>            
         </div>
-        <div class="card-image my_chart">
+        <!-- <div class="card-image my_chart">
           <div class="d-flex">
             
             <div class="brief_info_up_down">
@@ -172,63 +173,76 @@ setInterval(() => {
           </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
       <div class="col-md-6 overfl">
-      <div class="my_chart">
-        <canvas id="chartjs-0" class="chartjs">
-        </canvas>
-      </div>
-      <script>
-       function getValue(params) {
-        //console.log(params)
-        let valueHolder = []
-        params.forEach(value => {
-          valueHolder.push((Number(value)/100).toFixed(2))
-          
-        });
-       // console.log("array",valueHolder)
-        return valueHolder
-       }
-      const valueNext =  getValue({{context.forecast_y}})
-        new Chart(document.getElementById("chartjs-0"),
-        {
-        type: 'line',
-    data:{
-    labels: {{context.forecast_x|safe}},
-    datasets: [{
-      label: 'Next year price',
-      data:valueNext,
-      fill: false,
-      borderColor: 'black',
-    }]
-  
-    },
-    options: {
-      animations: {
-        tension: {
-          duration: 500,
-          easing: 'linear',
-          from: 1,
-          to: 0,
-          loop: true
-        }
-      },
-      scales: {
-        y: { // defining min and max so hiding the dataset does not change scale range
-          min: Math.min(...valueNext)-1,
-          max: Math.max(...valueNext)+1
-        }
-      }
-    }
+        <div class="my_chart">
+          <canvas id="chartjs-0" class="chartjs">
+          </canvas>
+        </div>
+        <script>
+           function getValueN(params) {
+   //console.log(params)
+   let valueHoldrUp = []
+   params.forEach(value => {
+    valueHoldrUp.push(value)
+     
+   });
+  // console.log("array",valueHolder)
+   return valueHoldrUp
+  }
+ const valuePrevForTop =  getValueN({{context.previous_y}})
+ console.log("ager value gula",valuePrevForTop.sort())
+         function getValue(params) {
+          //console.log(params)
+          let valueHolder = []
+          params.forEach(value => {
+            valueHolder.push(value)
+            
+          });
+          console.log("array",valueHolder)
+          return valueHolder
+         }
+        const valueNext =  getValue({{context.forecast_y}})
+        console.log("samner yera value",valueNext)
+          new Chart(document.getElementById("chartjs-0"),
+          {
+          type: 'line',
+      data:{
+      labels: {{context.forecast_x|safe}},
+      datasets: [{
+        label: 'Next year price',
+        data:valueNext,
+        fill: false,
+        borderColor: 'black',
+      }]
     
+      },
+      options: {
+        animations: {
+          tension: {
+            duration: 500,
+            easing: 'linear',
+            from: 1,
+            to: 0,
+            loop: true
+          }
+        },
+        scales: {
+          y: { // defining min and max so hiding the dataset does not change scale range
+            min: Math.min(...valuePrevForTop)-1,
+            max: Math.max(...valueNext)+500
+          }
+        }
       }
+      
+        }
+    
+          );</script>
   
-        );</script>
-
-
+      </div>
+      <div class="col-md-6 overfl">
         <div class="my_chart">
           <canvas id="chartjs-1" class="chartjs">
           </canvas>
@@ -238,7 +252,7 @@ setInterval(() => {
            //console.log(params)
            let valueHolder = []
            params.forEach(value => {
-             valueHolder.push(((Number(value)/100)-Math.floor(Math.random() * (10 - 1 + 1)) + 1).toFixed(2))
+             valueHolder.push(value)
              
            });
           // console.log("array",valueHolder)
@@ -251,7 +265,7 @@ setInterval(() => {
        data:{
        labels: {{context.previous_x|safe}},
        datasets: [{
-         label: 'Price of the year(2019)',
+         label: 'Price of the year(2020)',
          data:valuePrev,
          fill: false,
          borderColor: '#ff3946',
@@ -279,6 +293,11 @@ setInterval(() => {
          }
      
            );</script>
+      </div>
+      <div class="col-md-6 overfl">
+      
+
+    
 
 
  
@@ -291,14 +310,14 @@ setInterval(() => {
    //console.log(params)
    let valueHolder = []
    params.forEach(value => {
-    valueHolder.push(((Number(value)/100)-Math.floor(Math.random() * (15 - 1 + 1)) + 1).toFixed(2))
+    valueHolder.push(Number(value)-Math.floor(Math.random() * (70 - 40 + 1)) + 40)
      
    });
   // console.log("array",valueHolder)
    return valueHolder
   }
  const valuePrev2018 =  getValue({{context.previous_y}})
- console.log("prev year price y",valuePrev2018)
+ console.log("prev year price 2019",valuePrev2018)
    new Chart(document.getElementById("chartjs-2"),
    {
    type: 'line',
@@ -333,7 +352,7 @@ options: {
    );</script>
 
  <div class="">
-      <div class="my_chart">
+      <!-- <div class="my_chart">
         <canvas id="myChart"></canvas>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="text/javascript">
@@ -422,8 +441,8 @@ options: {
       
           })
       </script>
-    </div>
-    <div class="div my_chart">
+    </div> -->
+    <!-- <div class="div my_chart">
       <canvas id="brief_forecast"></canvas>
       <script>
         const brief = document.querySelector("#brief_forecast")
@@ -467,7 +486,7 @@ options: {
           
         })
       </script>
-    </div>
+    </div> -->
     </div>
     
     </div>

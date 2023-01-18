@@ -7,7 +7,7 @@
 </head>
 <body class="main">
   <div class="container actual_wrapper main_wrapper home">
-    <div class="row">
+    <div class="row wrap_raaw">
       <div class="col-3 sidebar ">
         <div class="">
           <div class="logo_div">
@@ -261,12 +261,23 @@
            <div class="top_gainers">
             <h3>Top 7 Gainers(Current)</h3>
             <canvas id="myChart"></canvas>
+           
+            <table class="ajaira_table">
+              {% for item in context['top5'] %}
+                <th class="valign-wrapper">{{item[2]}}% <img src="../static/gain-icon.png" height="25" width="25"></th>
+            {% endfor %}
+            </table>
         </div>
            </div>
           <div class="col-md-6 col-12 top_loser_div">
           <div class="top_gainers">
             <h3>Top 7 Losers(Current)</h3>
             <canvas id="topLosers"></canvas>
+            <table class="ajaira_table">
+              {% for item in context['bottom5'] %}
+                <th class="valign-wrapper">{{item[2]}}% <img src="../static/loss-icon.png" height="25" width="25"></th>
+            {% endfor %}
+            </table>
           </div>
       </div>
     </div>
