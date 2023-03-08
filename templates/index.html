@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Andaaj</title>
+  <title>andaaj</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/main.css">
 </head>
@@ -13,7 +13,7 @@
           <div class="logo_div">
            
           <!-- <img class="yoga-baba" src="../static//images/yoga.png" alt=""> -->
-          <h2 class="logo">Andaaz</h2>
+          <h2 class="logo">andaaz</h2>
           </div>
           <div class="menus">
             <div class="card-content black-text">
@@ -25,89 +25,19 @@
                   <td><h5 id="crop1">{{context.sixmonths[0][1]}}</h5></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td class="right">
-                      <h4 id="price1">৳{{context.sixmonths[0][2]}}</h4>
+                      <h4 id="price1">TK{{context.sixmonths[0][2]}}</h4>
                   <p id="pos-change" class="valign-wrapper right">{{context.sixmonths[0][3]}}%</p><img id="change1" src="../static/gain-icon.png" height="20" width="20"></td>
-    
                 </tr>
-              
                 <tr>
-                  
                   <td><h5 id="crop2">{{context.sixmonths[0][4]}}</h5></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                  <td class="right"><h4 id="price2">৳{{context.sixmonths[0][5]}}</h4>
+                  <td class="right"><h4 id="price2">TK{{context.sixmonths[0][5]}}</h4>
                   <p id="neg-change" class="valign-wrapper right">{{context.sixmonths[0][6]}}%</p><img id="change2" src="../static/loss-icon.png" height="20" width="20">
                     </td>
-                   
                 </tr>
-         
               </table>
-              <script>
-                function sleep(ms) {
-                  return new Promise(resolve => setTimeout(resolve, ms));
-                 }
-                function updateTime(i){
-                  $('#time').load('http://localhost:5000/ticker/'+0+ '/' + i);
-                }
-    
-                function updateCrop1(i){
-                  $('#crop1').load('http://localhost:5000/ticker/'+ 1 + '/' + i);
-                }
-    
-                function updatePrice1(i){
-                  $('#price1').load('http://localhost:5000/ticker/'+ 2 + '/' + i);
-                }
-    
-                function updateChange1(i){
-                  $("#change1").attr("src","../static/gain-icon.png");
-                  $('#pos-change').load('http://localhost:5000/ticker/'+ 3 + '/'  + i);
-    
-                }
-    
-                function updateCrop2(i){
-                  $('#crop2').load('http://localhost:5000/ticker/'+ 4 + '/'  + i);
-                }
-    
-                function updatePrice2(i){
-                  $('#price2').load('http://localhost:5000/ticker/'+ 5 + '/'  + i);
-                }
-    
-                function updateChange2(i){
-                  $("#change2").attr("src","../static/loss-icon.png");
-                  $('#neg-change').load('http://localhost:5000/ticker/'+ 6 + '/'  + i);
-    
-                }
-              </script>
-    
-                <script>
-                        var i = 0
-                        setInterval(async function(){
-                        i = (i+1)%5;
-                        updateTime(i);
-    
-                        updateCrop1(i);
-                        await sleep(200);
-    
-                        updatePrice1(i);
-                        await sleep(200);
-    
-                        updateChange1(i);
-                        await sleep(200);
-    
-                        updateCrop2(i);
-                        await sleep(200);
-    
-                        updatePrice2(i);
-                        await sleep(200);
-    
-                        updateChange2(i);
-                        await sleep(200);
-    
-                        }, 4000);
-    
-                </script>
-    
             </div>
-            <img src="../static/images/poster.gif" class="img-fluid" alt="">
+            <img src="../static/images/brain-with-digital-circuit-programmer-with-laptop-machine-learning-artificial-intelligence-digital-brain-artificial-thinking-process-concept-vector-isolated-illustration_335657-2246.avif" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -119,16 +49,12 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                      </form>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                       <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a style="cursor: pointer;" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">All Commodity</a>
+                        <a style="cursor: pointer;" class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">All crops</a>
                         <!-- Button trigger modal -->
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -232,9 +158,10 @@
 </div>
                       </li>
                       <li class="nav-item">
-                        <a href=""><img src="https://img.icons8.com/color/48/000000/male-user.png" alt=""></a>
+                        <a style="text-decoration:none; margin-right: 10px;" href="/register">register</a>
                   
                       </li>
+                      <li><a style="text-decoration:none; margin-right: 10px;" href="/login">login</a></li>
                       
                     </ul>
                     
@@ -243,10 +170,10 @@
               </nav>
         </div>
        <div class="container-fluid ">
-
         <div class="d-flex current_forecast">
           <div>
-            <h2>Dashboard</h2>
+            <h2>Crop dashboard</h2>
+            <p>{{mse}}</p>
           <p>Home/Dashboard</p>
           </div>
          
@@ -260,24 +187,51 @@
           <div class="col-md-6 col-12 top_gainer_div">
            <div class="top_gainers">
             <h3>Top 7 Gainers(Current)</h3>
-            <canvas id="myChart"></canvas>
-           
-            <table class="ajaira_table">
+            <table class="striped table table-bordered">
+              <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price (per Qtl.)</th>
+                    <th>Change</th>
+                </tr>
+              </thead>
+      
+              <tbody>
               {% for item in context['top5'] %}
-                <th class="valign-wrapper">{{item[2]}}% <img src="../static/gain-icon.png" height="25" width="25"></th>
-            {% endfor %}
+                <tr>
+                  <td>{{item[0]}}</td>
+                  <td>TK{{item[1]}}</td>
+                  <td class="valign-wrapper">{{item[2]}}% <img src="../static/gain-icon.png" height="25" width="25"></td>
+                </tr>
+              {% endfor %}
+              </tbody>
             </table>
+            <!-- <canvas id="myChart"></canvas> -->
         </div>
            </div>
           <div class="col-md-6 col-12 top_loser_div">
           <div class="top_gainers">
             <h3>Top 7 Losers(Current)</h3>
-            <canvas id="topLosers"></canvas>
-            <table class="ajaira_table">
+            <table class="striped table table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price (per Qtl.)</th>
+                    <th>Change</th>
+                </tr>
+              </thead>
+      
+              <tbody>
               {% for item in context['bottom5'] %}
-                <th class="valign-wrapper">{{item[2]}}% <img src="../static/loss-icon.png" height="25" width="25"></th>
-            {% endfor %}
+                <tr>
+                  <td>{{item[0]}}</td>
+                  <td>TK{{item[1]}}</td>
+                  <td class="valign-wrapper">{{item[2]}}% <img src="../static/loss-icon.png" height="25" width="25"></td>
+                </tr>
+              {% endfor %}
+              </tbody>
             </table>
+            <!-- <canvas id="topLosers"></canvas> -->
           </div>
       </div>
     </div>
@@ -311,7 +265,7 @@
       </div>
       <div class="col-md-2 col-sm-6 col-12">
         <div class="products ">
-         <a href="http://localhost:5000/commodity/rape"><img src="https://img.icons8.com/color/48/000000/seed.png" alt="" class="make_small"></a>
+         <a href="http://localhost:5000/commodity/rape"><img src="https://img.icons8.com/color/48/000000/mustard.png" alt="" class="make_small"></a>
          <h4>rape</h4>
         </div>
       </div>
@@ -369,23 +323,10 @@
     </div>
   </div>
   <div>
-	<!-- <div class="nav-wrapper">
-
-		<h3 class="card-panel #ffd54f amber lighten-2 center valign-wrapper center"><a class="brand-logo  #ffd54f-text text-lighten-4" href="#"><img alt="" src="/static/ApnaAnaajLogo.png" height="100px" width="100px" class="responsive-img" />
-          <span>Andaaza</span></a>
-          </a></h3><h3>
-
-	</div> -->
-
-    <!--
-  <h3 class="card-panel #ffd54f amber lighten-2 center valign-wrapper center"><img src="/static/ApnaAnaajLogo.png
-" height="70px" width="70px">Apna Anaaj</h3>
-    -->
-<!---->
     <div class="row botttom raw">
     <div class="card-panel col s9">
       <h4 class=" #e0f7fa cyan lighten-5">Top Gainers(Current trends)</h4>
-      <table class="striped">
+      <table class="striped table table-bordered">
         <tbody>
         {% for item in context['top5'] %}
           <tr>

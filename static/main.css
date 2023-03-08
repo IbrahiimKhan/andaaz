@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600;700&display=swap');
 body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Comfortaa', cursive!important;
-    font-family: 'Hind Siliguri', sans-serif;
+    font-family: 'Signika Negative', sans-serif;
     
 }
 .top_gainers{
@@ -21,7 +21,7 @@ body{
     text-align: center;
 }
 h1,h2{
-    color: #ff0077;
+    color: blue;
 }
 .ajaira td{
     padding-left: 5px;
@@ -32,7 +32,7 @@ table.ajaira {
     margin-left: 10px;
 }
 .logo{
-color: #ff0077;
+color: blue;
 margin-top: 40px;
 font-size: 40px;
 font-weight: bolder;
@@ -49,23 +49,23 @@ text-align: center;
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #ff0077 !important;
-    border-color: #ff0077!important;
+    background-color: blue !important;
+    border-color: blue!important;
 }
 input.form-control.me-2 {
-    border: 0.1px solid #ff0077;
+    border: 0.1px solid blue;
     border-radius: 0!important;
 }
 .btn-outline-success {
     color: #fff!important;
-    border-color: #ff0077!important;
+    border-color: blue!important;
     border-radius: 0!important;
-    background: #ff0077!important;
+    background: blue!important;
 
 
 }
 .btn-outline-success:hover{
-    background-color: #ff0077;
+    background-color: blue;
     color: #fff;
 }
 ul.navbar-nav.ms-auto.mb-2.mb-lg-0 {
@@ -153,10 +153,8 @@ strong.time {
     width: 100%!important;
 }
 .info_box {
-    margin-top: 20px;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-    height: 257px;
     border-radius: 5px;
 }
 .col-md-6.my_chart{
@@ -219,6 +217,7 @@ table.ajaira_table th {
 table.ajaira_table {
     text-align: center;
 }
+
 /* .main_ur_raw{
     background-image: url("../static/images/794179300b5f014610c07cacbb2bbfdb.gif");
     background-position: top center;
@@ -230,4 +229,10 @@ table.ajaira_table {
 }.modal-dialog{
     max-width: 900px!important;
 }
+}
+h1.text-start.login-text {
+    font-size: 66px;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bolder;
 }
